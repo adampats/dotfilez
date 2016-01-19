@@ -46,6 +46,17 @@ aws_sg_list () {
   aws ec2 describe-security-groups | jq -S ".|.SecurityGroups[]|{$jq_filter}"
 }
 
+# get the latest spot price for a given instance type ($1)
+aws_spot_price () {
+  if [ -z $1 ]; then
+    echo "Provide instance type as argument..."
+  else
+    zulu=$(date -j -u +"%Y-%m-%dT%H:%M:%S")
+    aws ec2 describe-spot-price-history --instance-types $1 \
+      --product-description "Linux/UNIX" --start-time $zulu | jq .
+  fi
+}
+
 # docker
 alias dm='docker-machine '
 dme () {
