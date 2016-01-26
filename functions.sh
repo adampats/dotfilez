@@ -151,12 +151,14 @@ nsx_dump_sgs () {
     echo "Provide NSX Manager hostname as argument."
   else
     nsx=$1
+    outfile=prod-nsx-sgs-$(timestamp).json
     read -p "NSX Username: " user
     read -s -p "NSX Password: " pass
     curl -k -X GET \
       https://$nsx/api/2.0/services/securitygroup/scope/globalroot-0 \
       -H "Accept: application/json" \
-      -u $user:$pass | jq . > prod-nsx-sgs-$(timestamp).json
+      -u $user:$pass | jq . > $outfile
+    echo "Dumped to $outfile"
   fi
 }
 
