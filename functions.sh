@@ -10,8 +10,8 @@ git_e_file () {
   if [ -z $1 ]; then
     echo "Provide repo path in format: org/repo/path/to/file"
   else
-    repo=$(echo "$1" | cut -d '/' -f1 -f2)
-    rfile=$(echo "$1" | cut -d '/' -f 3- )
+    repo=$(echo "$1" | cut -d '/' -f -2)
+    rfile=$(echo "$1" | cut -d '/' -f 3-)
     if [ -z $user ] || [ -z $pass ]; then
       read -p "Username: " user
       read -s -p "Password: " pass
