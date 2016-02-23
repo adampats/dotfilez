@@ -12,7 +12,7 @@ git_e_file () {
   else
     repo=$(echo "$1" | cut -d '/' -f1 -f2)
     rfile=$(echo "$1" | cut -d '/' -f 3- )
-    if [ -z $user ] || [ -z $pass ]; then
+    if [ -z $user ] && [ -z $pass ]; then
       read -p "Username: " user
       read -s -p "Password: " pass
     fi
