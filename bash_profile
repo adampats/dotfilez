@@ -14,3 +14,4 @@ source $HOME/git/personal/dotfilez/functions.sh
 
 # export PS1="\h:\W \u\$ "
 # export PS1="\h:\W \u\$(git-radar --bash --fetch) $ "
+export PS1="☣︎ \h:\W \$ "
