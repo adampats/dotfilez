@@ -76,6 +76,21 @@ aws_spot_price () {
   fi
 }
 
+# list spot requests, short format
+aws_spot_requests () {
+  if [ -z $1 ]; then
+    echo "INFO: Optionally provide region as argument. Default is current configured."
+  else
+    region="--region $1"
+  fi
+  aws ec2 describe-spot-instance-requests $region | \
+    jq -S ".|.SpotInstanceRequests[]|{ \
+      Status,SpotInstanceRequestId,State,Type,CreateTime,SpotPrice, \
+      InstanceType:(.LaunchSpecification.InstanceType), \
+      AvailabilityZone:(.LaunchSpecification.Placement.AvailabilityZone), \
+      ImageId:(.LaunchSpecification.ImageId)}"
+}
+
 # docker
 alias dm='docker-machine '
 dme () {
