@@ -34,17 +34,32 @@ aws_ec2_list () {
     ".|.Reservations[]|.Instances[]|{$jq_filter}"
 }
 
-# takes parameter of count (number of EC2 instances to run)
+# launch an instance with args
 aws_ec2_run () {
-  if [ -z $1 ]; then count=1; else count=$1; fi
-  jq_filter='State,VpcId,InstanceId,KeyName,SecurityGroups,InstanceType,Placement'
-  aws ec2 run-instances \
-    --image-id ami-d24c5cb3 \
-    --instance-type t2.micro \
-    --key-name 'adpatter_aws' \
-    --count $count \
-    --security-groups "ssh-anywhere" "web-anywhere" | jq -S \
-      ".|.Instances[]|{$jq_filter}"
+  # defaults
+  itype='t2.micro'
+  key='adamthepatterson_rsa'
+  ami='ami-3d2cce5d'
+  count=1
+
+  if [ -z $1 ]; then
+    echo 'Instance type as $1 minimum req arg.  Positional args [defaults]:'
+    echo "  aws_ec2_run \$itype [$itype] \$key [$key] \$ami [$ami] \$count [$count]"
+  else
+    itype=$1
+    if [ ! -z $2 ]; then key=$2; fi
+    if [ ! -z $3 ]; then ami=$3; fi
+    if [ ! -z $4 ]; then count=$4; fi
+
+    jq_filter='State,VpcId,InstanceId,KeyName,SecurityGroups,InstanceType,Placement'
+    aws ec2 run-instances \
+      --image-id $ami \
+      --instance-type $itype \
+      --key-name $key \
+      --count $count \
+      --security-groups "ssh-anywhere" "web-anywhere" | jq -S \
+        ".|.Instances[]|{$jq_filter}"
+  fi
 }
 
 # get public IP for an instance
@@ -157,7 +172,7 @@ docker_reg_image_versions () {
 }
 
 # Dump all docker registry image versions
-docker_reg_image_versions () {
+docker_reg_image_dump () {
   if [ -z $1 ]; then
     echo "Pass registry hostname as argument."
   else
