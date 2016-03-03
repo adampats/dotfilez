@@ -62,6 +62,20 @@ aws_ec2_run () {
   fi
 }
 
+# spin up some micros, specify count via $1
+aws_ec2_run_micro () {
+  if [ -z $1 ]; then key='adamthepatterson_rsa'; else key=$1; fi
+  if [ -z $2 ]; then count=1; else count=$2; fi
+  jq_filter='State,VpcId,InstanceId,KeyName,SecurityGroups,InstanceType,Placement'
+  aws ec2 run-instances \
+    --image-id ami-3d2cce5d \
+    --instance-type t2.micro \
+    --key-name $key \
+    --count $count \
+    --security-groups "ssh-anywhere" "web-anywhere" | jq -S \
+      ".|.Instances[]|{$jq_filter}"
+}
+
 # get public IP for an instance
 aws_ec2_ip () {
   aws ec2 describe-instances --instance-ids $1 | jq '.|.Reservations[]|.Instances[]|.PublicDnsName'
