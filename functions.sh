@@ -115,7 +115,7 @@ aws_spot_run () {
     if [ ! -z $4 ]; then ami=$4; fi
     if [ ! -z $5 ]; then count=$5; fi
 
-    # EC2 LaunchSpecification in JSON
+    # EC2 LaunchSpecification in JSON - because heredocs are STUPID
     read -r -d '' launchspec << EOF
 {
   "ImageId": "$ami",
