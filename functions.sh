@@ -94,6 +94,47 @@ aws_sg_list () {
   aws ec2 describe-security-groups | jq -S ".|.SecurityGroups[]|{$jq_filter}"
 }
 
+# launch a spot instance
+aws_spot_run () {
+  # defaults
+  itype='m3.medium'
+  price='0.03'
+  key='adamthepatterson_rsa'
+  ami='ami-f7a2bf96'
+  count=1
+
+  if [ -z $1 ]; then
+    echo 'Minimum req args: $1: instance_type $2: price'
+    echo 'Full positional args [defaults]:'
+    echo "  aws_ec2_run \$itype [$itype] \$price [$price] \$key [$key] " \
+      "\$ami [$ami] \$count [$count]"
+  else
+    itype=$1
+    if [ ! -z $2 ]; then price=$2; fi
+    if [ ! -z $3 ]; then key=$3; fi
+    if [ ! -z $4 ]; then ami=$4; fi
+    if [ ! -z $5 ]; then count=$5; fi
+
+    # EC2 LaunchSpecification in JSON
+    read -r -d '' launchspec << EOF
+{
+  "ImageId": "$ami",
+  "KeyName": "$key",
+  "InstanceType": "$itype",
+  "SecurityGroups": [ "allow_ssh" ]
+}
+EOF
+
+    jq_filter='Status,SpotInstanceRequestId,CreateTime,SpotPrice'
+    aws ec2 request-spot-instances \
+      --spot-price $price \
+      --type "one-time" \
+      --instance-count $count \
+      --launch-specification "$launchspec" | jq -S \
+        ".|.SpotInstanceRequests[]|{$jq_filter}"
+  fi
+}
+
 # get the latest spot price for a given instance type ($1)
 aws_spot_price () {
   if [ -z $1 ]; then
