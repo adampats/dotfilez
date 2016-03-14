@@ -158,7 +158,8 @@ aws_spot_requests () {
       Status,SpotInstanceRequestId,State,Type,CreateTime,SpotPrice, \
       InstanceType:(.LaunchSpecification.InstanceType), \
       AvailabilityZone:(.LaunchSpecification.Placement.AvailabilityZone), \
-      ImageId:(.LaunchSpecification.ImageId)}"
+      ImageId:(.LaunchSpecification.ImageId), \
+      InstanceId}"
 }
 
 # docker
