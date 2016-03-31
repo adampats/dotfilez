@@ -163,9 +163,11 @@ aws_spot_requests () {
 }
 
 # docker
+alias d='docker '
 alias dm='docker-machine '
+alias dc='docker-compose '
 dme () {
-  eval "$(docker-machine env dev)"
+  eval "$(docker-machine env default)"
 }
 
 docker_image_cleanup () {
