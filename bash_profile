@@ -6,6 +6,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH=$PATH:$(find $HOME/Applications/packer* -type d)
 export PATH=$PATH:$(find $HOME/Applications/terraform* -type d)
 export PATH=$PATH:$(find $HOME/Applications/etcd* -type d | head -1)
+export PATH=$PATH:$HOME/Applications
 
 alias gitp='/usr/bin/git -c user.name="adampats" -c user.email="adamthepatterson@gmail.com"'
 # alias dme='eval "$(docker-machine env dev)"'
