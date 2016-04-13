@@ -34,5 +34,5 @@ YELLOW="\[\033[0;33m\]"
 YELLOWBOLD="\[\033[1;33m\]"
 CYAN="\[\033[0;36m\]"
 CYANBOLD="\[\033[1;36m\]"
-RESETCOLOR="\[\e[00m\]"\
+RESETCOLOR="\[\e[00m\]"
 export PS1="$YELLOWBOLD ☣︎ \h:\W \$$RESETCOLOR "
