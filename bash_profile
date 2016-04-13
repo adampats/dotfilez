@@ -1,3 +1,10 @@
+
+# Load the default .profile
+[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
 # export HOMEBREW_GITHUB_API_TOKEN=FOO
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export GOPATH=$HOME/go
@@ -9,7 +16,13 @@ export PATH=$PATH:$(find $HOME/Applications/etcd* -type d | head -1)
 export PATH=$PATH:$HOME/Applications
 
 alias gitp='/usr/bin/git -c user.name="adampats" -c user.email="adamthepatterson@gmail.com"'
-# alias dme='eval "$(docker-machine env dev)"'
+alias gs='git status'
+alias ga='git add '
+alias dme='eval "$(docker-machine env default)"'
+alias tf='terraform'
+alias d='docker '
+alias dm='docker-machine '
+alias dc='docker-compose '
 
 dotfile=/Users/adam/git/dotfilez/functions.sh
 if [ -e "$dotfile" ]; then
