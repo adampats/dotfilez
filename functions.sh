@@ -1,9 +1,6 @@
-# A collection of handy aliases / functions.
+# A collection of handy functions.
 
 # git
-alias gitp='/usr/bin/git -c user.name="adampats" -c user.email="adamthepatterson@gmail.com"'
-alias gs='git status'
-alias ga='git add '
 
 # grab single file from GH Enterprise
 git_e_file () {
@@ -163,9 +160,15 @@ aws_spot_requests () {
 }
 
 # docker
-alias dm='docker-machine '
+
 dme () {
-  eval "$(docker-machine env dev)"
+  vm="$1"
+  if [ -z $1 ]; then
+    echo -n "Using 'default' as docker-machine vm..."
+    echo " override by passing vm name as argument."
+    vm='default'
+  fi
+  eval "$(docker-machine env $vm)"
 }
 
 docker_image_cleanup () {
