@@ -137,9 +137,14 @@ aws_spot_price () {
   if [ -z $1 ]; then
     echo "Provide instance type as argument..."
   else
+    if [ ! -z $2 ]; then
+      p_desc="$2"
+    else
+      p_desc='Linux/UNIX'
+    fi
     zulu=$(date -j -u +"%Y-%m-%dT%H:%M:%S")
     aws ec2 describe-spot-price-history --instance-types $1 \
-      --product-description "Linux/UNIX" --start-time $zulu | jq .
+      --product-description "$p_desc" --start-time $zulu | jq .
   fi
 }
 
