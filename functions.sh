@@ -98,6 +98,10 @@ aws_sg_list () {
   aws ec2 describe-security-groups | jq -S ".|.SecurityGroups[]|{$jq_filter}"
 }
 
+aws_iam_roles () {
+  aws iam list-roles | jq -S ".|.Roles[]|{RoleName,Arn,RoleId,CreateDate}"
+}
+
 # launch a spot instance
 aws_spot_run () {
   # defaults
