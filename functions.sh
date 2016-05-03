@@ -31,6 +31,13 @@ aws_ec2_list () {
     ".|.Reservations[]|.Instances[]|{$jq_filter}"
 }
 
+aws_ec2_images () {
+  aws ec2 describe-images --owner "self" | jq -S ".|.Images[]|{ \
+    Name,ImageId,Platform,Description, \
+    SnapshotId:(.BlockDeviceMappings[].Ebs.SnapshotId), \
+    VolumeSize:(.BlockDeviceMappings[].Ebs.VolumeSize)}"
+}
+
 # launch an instance with args
 aws_ec2_run () {
   # defaults
