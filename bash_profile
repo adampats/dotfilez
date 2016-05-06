@@ -5,6 +5,9 @@
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+# Or use rbenv because it's better
+eval "$(rbenv init -)"
+
 # export HOMEBREW_GITHUB_API_TOKEN=FOO
 export JAVA_HOME=$(/usr/libexec/java_home)
 export GOPATH=$HOME/go
