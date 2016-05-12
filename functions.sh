@@ -26,8 +26,14 @@ git_e_file () {
 complete -C $(which aws_completer) aws
 
 aws_ec2_list () {
+  if [ -z $1 ]; then
+    echo "INFO: Optionally provide region as argument. Default is current configured."
+  else
+    region="--region $1"
+  fi
+
   jq_filter='PublicDnsName,VpcId,InstanceId,KeyName,InstanceType,State,ImageId,SubnetId,LaunchTime'
-  aws ec2 describe-instances | jq -S \
+  aws ec2 describe-instances $region | jq -S \
     ".|.Reservations[]|.Instances[]|{$jq_filter}"
 }
 
