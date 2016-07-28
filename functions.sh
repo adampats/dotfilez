@@ -181,6 +181,17 @@ aws_spot_requests () {
       InstanceId}"
 }
 
+# put ~/.aws/config creds into env variables
+aws_env_vars () {
+  unset AWS_ACCESS_KEY_ID
+  unset AWS_SECRET_ACCESS_KEY
+  export AWS_ACCESS_KEY_ID=$( \
+    cat ~/.aws/config | grep -i aws_access_key_id | awk -F\= '{print $2}' )
+  export AWS_SECRET_ACCESS_KEY=$( \
+    cat ~/.aws/config | grep -i aws_secret_access_key | awk -F\= '{print $2}' )
+}
+
+
 # docker
 
 dme () {
