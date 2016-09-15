@@ -299,7 +299,7 @@ timer () {
        : $((sec--))
     done
     echo "Timer expired!"
-    terminal-notifier -message "Slept for $min minutes..." -title "Timer expired!"
+    terminal-notifier -message "Slept for $1 minutes..." -title "Timer expired!"
   fi
 }
 
