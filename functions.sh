@@ -1,6 +1,6 @@
 # A collection of handy functions.
 
-# git
+### git
 
 # grab single file from GH Enterprise
 git_e_file () {
@@ -21,7 +21,8 @@ git_e_file () {
   fi
 }
 
-# AWS
+### AWS
+
 # enable AWS CLI tab completion!
 complete -C $(which aws_completer) aws
 
@@ -191,8 +192,7 @@ aws_env_vars () {
     cat ~/.aws/config | grep -i aws_secret_access_key | awk -F\= '{print $2}' )
 }
 
-
-# docker
+### docker
 
 dme () {
   vm="$1"
@@ -281,9 +281,26 @@ docker_reg_image_dump () {
   fi
 }
 
-# general
+### general
+
 timestamp() {
   date +"%Y%m%d%H%M%S"
+}
+
+timer () {
+  if [ -z $1 ]; then
+    echo "Provide time in minutes as argument."
+  else
+    echo "Sleeping for $1 minutes... "
+    sec=$(( $1 * 60 ))
+    while [ $sec -gt 0 ]; do
+       echo -ne "\t$sec\033[0K\r"
+       sleep 1
+       : $((sec--))
+    done
+    echo "Timer expired!"
+    terminal-notifier -message "Slept for $min minutes..." -title "Timer expired!"
+  fi
 }
 
 # NSX - yuck
