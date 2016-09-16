@@ -298,7 +298,7 @@ timer () {
        sleep 1
        : $((sec--))
     done
-    echo "Timer expired!"
+    echo "Timer expired @ $(date +%H:%M:%S)"
     say -v whisper "times up"
     terminal-notifier -message "Slept for $1 minutes..." -title "Timer expired!"
   fi
