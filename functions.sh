@@ -192,6 +192,17 @@ aws_env_vars () {
     cat ~/.aws/config | grep -i aws_secret_access_key | awk -F\= '{print $2}' )
 }
 
+aws_access_key_to_user () {
+  if [ -z $1 ]; then
+    echo "Usage: $0 AWS_ACCESS_KEY_ID"
+  else
+    for i in $(aws iam list-users | jq -r '.|.Users[]|.UserName'); do
+      aws iam list-access-keys --user-name "$i" | grep -i -B 3 "$1";
+    done
+  fi
+}
+
+
 ### docker
 
 dme () {
