@@ -192,6 +192,7 @@ aws_env_vars () {
     cat ~/.aws/config | grep -i aws_secret_access_key | awk -F\= '{print $2}' )
 }
 
+# find what IAM user an access key is tied to
 aws_access_key_to_user () {
   if [ -z $1 ]; then
     echo "Usage: $0 AWS_ACCESS_KEY_ID"
@@ -199,6 +200,23 @@ aws_access_key_to_user () {
     for i in $(aws iam list-users | jq -r '.|.Users[]|.UserName'); do
       aws iam list-access-keys --user-name "$i" | grep -i -B 3 "$1";
     done
+  fi
+}
+
+# return short instance list based on keyword in Name tag
+aws_ec2_find () {
+  if [ -z $1 ]; then
+    echo "Provide single Key=Value pair to search on as argument."
+  else
+    key=$(echo "$1" | awk -F= '{print $1}')
+    value=$(echo "$1" | awk -F= '{print $2}')
+    jq_filter="PublicDnsName,VpcId,InstanceId,KeyName,InstanceType,State,\
+      ImageId,SubnetId,LaunchTime,Tags:(.Tags[]|select(.Key ==\"$key\"))"
+
+    aws ec2 describe-instances --filter \
+      "Name=tag-key,Values=$key" \
+      "Name=tag-value,Values=$value" | \
+        jq -S ".|.Reservations[]|.Instances[]|{$jq_filter}"
   fi
 }
 
