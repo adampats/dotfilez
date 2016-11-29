@@ -226,7 +226,8 @@ aws_ec2_find () {
     key=$(echo "$1" | awk -F= '{print $1}')
     value=$(echo "$1" | awk -F= '{print $2}')
     jq_filter="PublicDnsName,VpcId,InstanceId,PrivateIpAddress,InstanceType,\
-      State,ImageId,SubnetId,LaunchTime,Tags:(.Tags[]|select(.Key ==\"$key\"))"
+      PublicIpAddress,State,ImageId,SubnetId,LaunchTime,\
+      Tags:(.Tags[]|select(.Key ==\"$key\"))"
 
     aws ec2 describe-instances --filter \
       "Name=tag-key,Values=$key" \
