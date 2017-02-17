@@ -210,7 +210,7 @@ aws_env_vars () {
 # find what IAM user an access key is tied to
 aws_access_key_to_user () {
   if [ -z $1 ]; then
-    echo "Usage: $0 AWS_ACCESS_KEY_ID"
+    echo "Usage: $FUNCNAME AWS_ACCESS_KEY_ID"
   else
     for i in $(aws iam list-users | jq -r '.|.Users[]|.UserName'); do
       aws iam list-access-keys --user-name "$i" | grep -i -B 3 "$1";
