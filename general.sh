@@ -30,3 +30,16 @@ timer () {
     terminal-notifier -message "Slept for $1 minutes..." -title "Timer expired!"
   fi
 }
+
+weather () {
+  if [ -z $1 ]; then
+    location="seattle,wa"
+  else
+    location=$1
+  fi
+  jq_filter="weather,temperature_string,relative_humidity,wind_string,\
+    feelslike_string,visibility_mi,precip_today_string"
+  cd ~/Applications # location of wunderground.key (gunderground bug)
+  gunderground $location | jq -S ".|.current_observation|{$jq_filter}"
+  cd $OLDPWD
+}
