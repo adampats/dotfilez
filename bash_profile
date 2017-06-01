@@ -21,6 +21,9 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH=$PATH:$(find $HOME/Applications/bin -type d)
 export PATH=$PATH:$HOME/Applications
 
+dotfile="$HOME/git/dotfilez/functions.sh"
+if [ -e "$dotfile" ]; then source "$dotfile"; fi
+
 alias gitp='/usr/bin/git -c user.name="adampats" -c user.email="adamthepatterson@gmail.com" '
 alias gitw='/usr/bin/git -c user.name="apatterson" -c user.email="apatterson@datapipe.com" '
 alias gs='git status'
@@ -31,11 +34,7 @@ alias tf='terraform '
 alias d='docker '
 alias dm='docker-machine '
 alias dc='docker-compose '
-
-dotfile=/Users/adam/git/dotfilez/functions.sh
-if [ -e "$dotfile" ]; then
-  source "$dotfile"
-fi
+alias lv='list_vars'
 
 GREEN="\[\033[0;32m\]"
 YELLOW="\[\033[0;33m\]"
@@ -44,3 +43,11 @@ CYAN="\[\033[0;36m\]"
 CYANBOLD="\[\033[1;36m\]"
 RESETCOLOR="\[\e[00m\]"
 export PS1="$YELLOWBOLD ☣︎ \h:\W \$$RESETCOLOR "
+
+# The next line updates PATH for the Google Cloud SDK.
+gcpath="$HOME/Applications/google-cloud-sdk/path.bash.inc"
+if [ -f "$gcpath" ]; then source "$gcpath"; fi
+
+# The next line enables shell command completion for gcloud.
+gccompletion="$HOME/Applications/google-cloud-sdk/completion.bash.inc"
+if [ -f "$gccompletion" ]; then source "$gccompletion"; fi
