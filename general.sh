@@ -43,3 +43,7 @@ weather () {
   gunderground $location | jq -S ".|.current_observation|{$jq_filter}"
   cd $OLDPWD
 }
+
+list_vars () {
+  compgen -v | while read var; do printf "%s=%q\n" "$var" "${!var}"; done
+}
