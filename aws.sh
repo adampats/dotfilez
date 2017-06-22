@@ -212,3 +212,8 @@ aws_ec2_find () {
         jq -S ".|.Reservations[]|.Instances[]|{$jq_filter}"
   fi
 }
+
+# get current AWS account number based on IAM credentials being used
+aws_get_account_id () {
+  aws sts get-caller-identity --output text --query Account
+}
