@@ -81,7 +81,11 @@ aws_ec2_run_micro () {
 
 # get public IP for an instance
 aws_ec2_ip () {
-  aws ec2 describe-instances --instance-ids $1 | jq '.|.Reservations[]|.Instances[]|.PublicDnsName'
+  if [ -z $1 ]; then
+    echo "Provide instance id as argument..."
+  else
+    aws ec2 describe-instances --instance-ids $1 | jq '.|.Reservations[]|.Instances[]|.PublicDnsName'
+  fi
 }
 
 # takes parameter of EC2 instance ID to terminate
