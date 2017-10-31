@@ -2,8 +2,8 @@
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# # Load RVM into a shell session *as a function*
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # screw you apple...
 if which pyenv > /dev/null; then
@@ -17,7 +17,7 @@ eval "$(rbenv init -)"
 export JAVA_HOME=$(/usr/libexec/java_home)
 export GOPATH=$HOME/go
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH=$PATH:$(find $HOME/Applications/bin -type d)
 export PATH=$PATH:$HOME/Applications
 
@@ -25,7 +25,6 @@ dotfile="$HOME/git/dotfilez/functions.sh"
 if [ -e "$dotfile" ]; then source "$dotfile"; fi
 
 alias gitp='/usr/bin/git -c user.name="adampats" -c user.email="adamthepatterson@gmail.com" '
-alias gitw='/usr/bin/git -c user.name="apatterson" -c user.email="apatterson@datapipe.com" '
 alias gs='git status'
 alias ga='git add '
 alias gd='git diff '
