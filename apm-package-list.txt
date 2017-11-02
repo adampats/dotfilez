@@ -1,0 +1,16 @@
+atom-beautify@0.30.6
+atom-keyboard-macros@0.11.0
+busy-signal@1.4.3
+intentions@1.1.5
+language-chef@0.11.0
+language-docker@1.1.8
+language-groovy@0.7.0
+language-inspec@1.0.0
+language-terraform@0.8.1
+linter@2.0.0
+linter-docker@0.2.1
+linter-rubocop@2.2.0
+linter-terraform-syntax@1.2.1
+linter-ui-default@1.6.10
+pretty-json@1.6.4
+
