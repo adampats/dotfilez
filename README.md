@@ -40,3 +40,15 @@ pyenv install -v 2.7.14
 ```
 
 https://github.com/pyenv/pyenv/wiki/Common-build-problems
+
+### Add SSH key(s) to Keychain
+
+```
+ssh-add -K ~/.ssh/adampatterson_gh
+cat << EOF >> ~/.ssh/config
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/adampatterson_gh
+EOF
+```
