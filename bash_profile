@@ -35,13 +35,13 @@ alias dm='docker-machine '
 alias dc='docker-compose '
 alias lv='list_vars'
 
-GREEN="\[\033[0;32m\]"
-YELLOW="\[\033[0;33m\]"
-YELLOWBOLD="\[\033[1;33m\]"
-CYAN="\[\033[0;36m\]"
-CYANBOLD="\[\033[1;36m\]"
-RESETCOLOR="\[\e[00m\]"
-export PS1="$YELLOWBOLD ☣︎ \h:\W \$$RESETCOLOR "
+# GREEN="\[\033[0;32m\]"
+# YELLOW="\[\033[0;33m\]"
+# YELLOWBOLD="\[\033[1;33m\]"
+# CYAN="\[\033[0;36m\]"
+# CYANBOLD="\[\033[1;36m\]"
+# RESETCOLOR="\[\e[00m\]"
+export PS1="\[\033[1;33m\]\h (\W) \$\[\e[00m\] "
 
 # The next line updates PATH for the Google Cloud SDK.
 gcpath="$HOME/Applications/google-cloud-sdk/path.bash.inc"
