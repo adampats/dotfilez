@@ -41,7 +41,14 @@ alias lv='list_vars'
 # CYAN="\[\033[0;36m\]"
 # CYANBOLD="\[\033[1;36m\]"
 # RESETCOLOR="\[\e[00m\]"
-export PS1="\[\033[1;33m\]\h (\W) \$\[\e[00m\] "
+
+if [[ -f ~/.git-prompt.sh ]]; then
+  source ~/.git-prompt.sh
+  export PS1="\[\033[1;33m\]\h (\W) $(__git_ps1 "\[\033[0;36m\]{%s}\[\e[00m\]") \[\033[0;33m\]\$\[\e[00m\] "
+else
+  export PS1="\[\033[1;33m\]\h (\W) \$\[\e[00m\] "
+fi
+
 
 # The next line updates PATH for the Google Cloud SDK.
 gcpath="$HOME/Applications/google-cloud-sdk/path.bash.inc"
