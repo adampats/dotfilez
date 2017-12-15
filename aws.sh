@@ -221,3 +221,8 @@ aws_ec2_find () {
 aws_get_account_id () {
   aws sts get-caller-identity --output text --query Account
 }
+
+# remove AWS credential env vars from current shell
+aws_unset_env_vars () {
+  unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID
+}
