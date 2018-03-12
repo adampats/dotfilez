@@ -35,6 +35,7 @@ alias d='docker '
 alias dm='docker-machine '
 alias dc='docker-compose '
 alias lv='list_vars'
+alias k='kubectl '
 
 # GREEN="\[\033[0;32m\]"
 # YELLOW="\[\033[0;33m\]"
