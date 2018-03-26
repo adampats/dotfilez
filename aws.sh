@@ -226,3 +226,24 @@ aws_get_account_id () {
 aws_unset_env_vars () {
   unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID
 }
+
+# aws sts assume-role helper method - pulls creds + token into current shell
+aws_sts_assume_role () {
+  if [ -z $1 ]; then
+    echo "Provide role arn as argument"
+  else
+    session_name='aws_sts_assume_role'
+    temp_file="$PWD/temp_creds_$(timestamp)"
+    aws sts assume-role --output json --role-arn "$1" \
+      --role-session-name "$session_name" > "$temp_file"
+    if [[ "$?" == '0' ]]; then
+      export AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' "$temp_file")
+      export AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' "$temp_file")
+      export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' "$temp_file")
+      echo "Done - STS creds set for $1"
+    else
+      echo "Error"
+    fi
+    rm -f "$temp_file"
+  fi
+}
