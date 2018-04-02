@@ -48,7 +48,7 @@ alias k='kubectl '
 if [[ -f ~/.git-prompt.sh ]]; then
   source ~/.git-prompt.sh
   export GIT_PS1_SHOWDIRTYSTATE=1
-  export PS1='\[\033[1;33m\]\h (\W) $(__git_ps1 "\[\033[0;36m\]{%s}\[\e[00m\]") \[\033[0;33m\]\$\[\e[00m\] '
+  export PS1="\[\033[1;33m\]\h (\W) $(__git_ps1 "\[\033[0;36m\]{%s}\[\e[00m\]") \[\033[0;33m\]\$\[\e[00m\] "
 else
   export PS1="\[\033[1;33m\]\h (\W) \$\[\e[00m\] "
 fi
