@@ -1,3 +1,4 @@
+atom-alignment@0.13.0
 atom-beautify@0.30.6
 atom-keyboard-macros@0.11.0
 busy-signal@1.4.3
@@ -13,4 +14,4 @@ linter-rubocop@2.2.0
 linter-terraform-syntax@1.2.1
 linter-ui-default@1.6.10
 pretty-json@1.6.4
-
+split-diff@1.5.2
