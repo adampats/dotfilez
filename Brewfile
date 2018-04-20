@@ -57,6 +57,7 @@ brew 'ruby-build'
 brew 's3cmd'
 brew 'shellcheck'
 brew 'skaffold'
+brew 'sshuttle'
 brew 'terminal-notifier'
 brew 'terragrunt', force: true, conflicts_with: ['tfenv']
 brew 'tfenv'
