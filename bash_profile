@@ -36,6 +36,7 @@ alias dm='docker-machine '
 alias dc='docker-compose '
 alias lv='list_vars'
 alias k='kubectl '
+alias tk='bundle exec kitchen '
 
 # GREEN="\[\033[0;32m\]"
 # YELLOW="\[\033[0;33m\]"
