@@ -178,14 +178,18 @@ aws_spot_requests () {
       InstanceId}"
 }
 
-# put ~/.aws/config creds into env variables
+# put ~/.aws/credentials creds into env variables
 aws_env_vars () {
-  unset AWS_ACCESS_KEY_ID
-  unset AWS_SECRET_ACCESS_KEY
-  export AWS_ACCESS_KEY_ID=$( \
-    cat ~/.aws/config | grep -i aws_access_key_id | awk -F\= '{print $2}' )
-  export AWS_SECRET_ACCESS_KEY=$( \
-    cat ~/.aws/config | grep -i aws_secret_access_key | awk -F\= '{print $2}' )
+  if [ -z $1 ]; then
+    echo "Provide profile name as first argument."
+  else
+    unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID
+    export AWS_ACCESS_KEY_ID=$(cat ~/.aws/credentials | \
+      awk "/^\[$1\]/{getline;print}" | awk -F "=" '/aws_access_key_id/ {print $2}' | xargs )
+    export AWS_SECRET_ACCESS_KEY=$(cat ~/.aws/credentials | \
+      awk "/$AWS_ACCESS_KEY_ID/{getline;print}" | awk -F "=" '/aws_secret_access_key/ {print $2}' | xargs )
+    echo "Profile: $1 - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID - REGION vars unchanged"
+  fi
 }
 
 # find what IAM user an access key is tied to
