@@ -52,6 +52,7 @@ brew 's3cmd'
 brew 'shellcheck'
 brew 'skaffold'
 brew 'sshuttle'
+brew 'terraform-docs'
 brew 'terminal-notifier'
 brew 'terragrunt', force: true, conflicts_with: ['tfenv']
 brew 'tfenv'
