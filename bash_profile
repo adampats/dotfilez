@@ -47,7 +47,7 @@ alias tk='bundle exec kitchen '
 # CYANBOLD="\[\033[1;36m\]"
 # RESETCOLOR="\[\e[00m\]"
 
-# https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+# https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 if [[ -f ~/.git-prompt.sh ]]; then
   source ~/.git-prompt.sh
   export GIT_PS1_SHOWDIRTYSTATE=1
