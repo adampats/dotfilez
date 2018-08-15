@@ -251,3 +251,30 @@ aws_sts_assume_role () {
     rm -f "$temp_file"
   fi
 }
+
+# aws cli mfa helper - acquire sts creds when using MFA
+aws_mfa_sts () {
+  if [[ -z $1 ]]; then
+    echo "Provide MFA arn + token as arguments."
+  elif [[ -z $AWS_DEFAULT_REGION ]]; then
+    echo "Setting AWS_DEFAULT_REGION is a good idea."
+  else
+    mfa_arn="$1"
+    token="$2"
+    temp_file="$PWD/temp_creds_$(timestamp)"
+    aws sts get-session-token \
+      --region $AWS_DEFAULT_REGION \
+      --output json \
+      --serial-number $mfa_arn \
+      --token-code $token > "$temp_file"
+    if [[ "$?" == '0' ]]; then
+      export AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' "$temp_file")
+      export AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' "$temp_file")
+      export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' "$temp_file")
+      echo "Done - STS creds set for $1"
+    else
+      echo "Error"
+    fi
+    rm -f "$temp_file"
+  fi
+}
