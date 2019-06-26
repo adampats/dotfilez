@@ -4,6 +4,7 @@ tap 'caskroom/cask'
 tap 'homebrew/bundle'
 
 brew 'ansible'
+brew 'asdf'
 brew 'autossh'
 brew 'awscli'
 brew 'bash'
