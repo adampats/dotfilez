@@ -17,6 +17,7 @@ fi
 # export HOMEBREW_GITHUB_API_TOKEN=FOO
 export JAVA_HOME=$(/usr/libexec/java_home)
 export GOPATH=$HOME/go
+export GO111MODULE=on
 
 mkdir -p $HOME/Applications/bin
 export PATH=$PATH:$(find $HOME/Applications/bin -type d)
