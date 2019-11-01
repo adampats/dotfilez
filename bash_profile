@@ -18,6 +18,7 @@ export GO111MODULE=on
 mkdir -p $HOME/Applications/bin
 export PATH=$PATH:$(find $HOME/Applications/bin -type d)
 export PATH=$PATH:$HOME/Applications
+export PATH=$PATH:$HOME/go/bin
 
 dotfile="$HOME/git/dotfilez/functions.sh"
 if [ -e "$dotfile" ]; then source "$dotfile"; fi
