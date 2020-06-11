@@ -6,11 +6,10 @@ if which pyenv > /dev/null; then
   eval "$(pyenv init -)"
 fi
 
-if which rbenv > /dev/null; then
-  eval "$(rbenv init -)"
-fi
+eval "$(rbenv init -)"
 
-# export HOMEBREW_GITHUB_API_TOKEN=FOO
+eval "$(jenv init -)"
+
 export JAVA_HOME=$(/usr/libexec/java_home)
 export GOPATH=$HOME/go
 export GO111MODULE=on
@@ -20,7 +19,7 @@ export PATH=$PATH:$(find $HOME/Applications/bin -type d)
 export PATH=$PATH:$HOME/Applications
 export PATH=$PATH:$HOME/go/bin
 
-dotfile="$HOME/git/dotfilez/functions.sh"
+dotfile="$HOME/git/personal/dotfilez/functions.sh"
 if [ -e "$dotfile" ]; then source "$dotfile"; fi
 
 alias gitp='/usr/bin/git -c user.name="adampats" -c user.email="adampatterson@protonmail.com" '
@@ -46,7 +45,7 @@ alias tk='bundle exec kitchen '
 # CYANBOLD="\[\033[1;36m\]"
 # RESETCOLOR="\[\e[00m\]"
 
-# https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+# https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
 if [[ -f ~/.git-prompt.sh ]]; then
   source ~/.git-prompt.sh
   export GIT_PS1_SHOWDIRTYSTATE=1
@@ -62,3 +61,10 @@ if [ -f "$gcpath" ]; then source "$gcpath"; fi
 # The next line enables shell command completion for gcloud.
 gccompletion="$HOME/Applications/google-cloud-sdk/completion.bash.inc"
 if [ -f "$gccompletion" ]; then source "$gccompletion"; fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+source <(kubectl completion bash)
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+complete -C /usr/local/bin/vault vault
