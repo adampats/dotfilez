@@ -99,3 +99,7 @@ jenkins_run_job () {
 wifi_signal () {
   /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 }
+
+wifi_survey () {
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s
+}
