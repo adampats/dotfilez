@@ -95,3 +95,7 @@ jenkins_run_job () {
     echo $resp
   fi
 }
+
+wifi_signal () {
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
+}
