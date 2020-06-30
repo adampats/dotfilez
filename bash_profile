@@ -14,6 +14,9 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export GOPATH=$HOME/go
 export GO111MODULE=on
 
+# Turns off OS X Catalina warning about zsh
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 mkdir -p $HOME/Applications/bin
 export PATH=$PATH:$(find $HOME/Applications/bin -type d)
 export PATH=$PATH:$HOME/Applications
