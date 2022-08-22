@@ -7,7 +7,6 @@ if which pyenv > /dev/null; then
 fi
 
 eval "$(rbenv init -)"
-
 eval "$(jenv init -)"
 
 export JAVA_HOME=$(/usr/libexec/java_home)

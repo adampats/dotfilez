@@ -1,20 +1,5 @@
 ### AWS
 
-# bog shortcut for switching accounts
-bog_switch () {
-  if [ -z $(command -v bog) ]; then
-    echo "bog not found."
-  else
-    if [ -z $1 ]; then
-      echo 'Provide bog account to switch to as argument. bog list:'
-      bog -l
-    else
-      bog $1
-      aws_env_vars
-    fi
-  fi
-}
-
 # enable AWS CLI tab completion!
 complete -C $(which aws_completer) aws
 

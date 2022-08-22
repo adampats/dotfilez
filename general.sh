@@ -51,25 +51,6 @@ list_vars () {
 
 ### git
 
-# grab single file from GH Enterprise
-git_e_file () {
-  if [ -z $1 ]; then
-    echo "Provide repo path in format: org/repo/path/to/file"
-  else
-    repo=$(echo "$1" | cut -d '/' -f -2)
-    rfile=$(echo "$1" | cut -d '/' -f 3-)
-    if [ -z $user ] || [ -z $pass ]; then
-      read -p "Username: " user
-      read -s -p "Password: " pass
-    fi
-    curl -k -X GET -O -L \
-      "https://github.starbucks.net/api/v3/repos/$repo/contents/$rfile" \
-      -H "Accept: application/vnd.github.v3.raw" \
-      -u $user:$pass
-    echo 'Done. File in current directory. Credentials cached in $user:$pass variables...'
-  fi
-}
-
 # jenkins
 jenkins_set_jcli () {
   if [ -z $JENKINS ]; then
