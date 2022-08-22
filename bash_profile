@@ -70,3 +70,9 @@ source <(kubectl completion bash)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 complete -C /usr/local/bin/vault vault
+
+source $HOME/.asdf/asdf.sh
+source $HOME/.asdf/completions/asdf.bash
+
+# disable homebrew autoupdate
+export HOMEBREW_NO_AUTO_UPDATE=1
