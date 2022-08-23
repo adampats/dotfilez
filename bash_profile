@@ -2,10 +2,11 @@
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
-if which pyenv > /dev/null; then
-  eval "$(pyenv init -)"
-fi
+# disable homebrew autoupdate
+export HOMEBREW_NO_AUTO_UPDATE=1
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
+eval "$(pyenv init -)"
 eval "$(rbenv init -)"
 eval "$(jenv init -)"
 
@@ -70,9 +71,3 @@ source <(kubectl completion bash)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 complete -C /usr/local/bin/vault vault
-
-source $HOME/.asdf/asdf.sh
-source $HOME/.asdf/completions/asdf.bash
-
-# disable homebrew autoupdate
-export HOMEBREW_NO_AUTO_UPDATE=1
