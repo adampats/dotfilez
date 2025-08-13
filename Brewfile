@@ -1,86 +1,159 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
-tap 'weaveworks/tap'
+tap 'homebrew/cask'
+tap 'homebrew/core'
 
-brew 'asdf'
-brew 'autoconf'
-brew 'automake'
-brew 'autossh'
-brew 'aws-iam-authenticator'
-brew 'awscli'
+### Primary
+brew 'aichat'
 brew 'bash'
-brew 'cmake'
+brew 'bash-completion'
 brew 'coreutils'
 brew 'curl'
-brew 'dep'
-brew 'dive'
-brew 'doctl'
-brew 'eksctl'
-brew 'fargatecli'
+brew 'docker'
 brew 'ffmpeg'
-brew 'gawk'
-brew 'gdrive'
+brew 'fzf'
+brew 'gh'
 brew 'git'
-brew 'git-crypt'
 brew 'git-extras'
 brew 'git-lfs'
-brew 'git-secret'
 brew 'gnu-sed'
 brew 'gnupg'
 brew 'gnutls'
-brew 'go'
 brew 'grc'
-brew 'groovy'
-brew 'helm'
-brew 'hping'
-brew 'httpie'
-brew 'httrack'
-brew 'hub'
-brew 'jenv'
-brew 'jp2a'
 brew 'jq'
-brew 'kubernetes-cli'
-brew 'kubernetes-helm'
-brew 'kubectx'
-brew 'kustomize'
 brew 'libgcrypt'
-brew 'libgit2'
-brew 'libpng'
 brew 'libxml2'
-brew 'minikube'
-brew 'mplayer'
 brew 'ncdu'
-brew 'ngrep'
+brew 'netcat'
 brew 'nmap'
+brew 'ollama'
 brew 'openssl'
-brew 'openvpn'
-brew 'p7zip'
-brew 'pandoc'
-brew 'pyenv'
-brew 'rbenv'
 brew 'readline'
-brew 'rpm2cpio'
-brew 'ruby-build'
-brew 's3cmd'
-brew 'shellcheck'
-brew 'skaffold'
-brew 'sshuttle'
-brew 'terraform-docs'
+brew 'repomix'
+brew 'sl'
 brew 'terminal-notifier'
 brew 'tmux'
 brew 'tree'
-brew 'vault'
 brew 'wget'
-brew 'youtube-dl'
-brew 'yq'
+brew 'yt-dlp'
 
-cask 'atom'
-cask 'cryptomator'
+### Apps
+cask 'chatgpt'
+cask 'claude'
+# cask 'cursor'
+# cask 'cyberduck'
+cask 'firefox'
+# cask 'gimp'
+cask 'google-chrome'
+cask 'istat-menus'
 cask 'iterm2'
-cask 'standard-notes'
+cask 'keepassxc'
+# cask 'kindle'
+cask 'lulu'
+cask 'postman'
+brew 'obsidian'
+# cask 'slack'
 cask 'sublime-text'
-cask 'vagrant'
+# cask 'vagrant'
+cask 'visual-studio-code'
 cask 'vlc'
-cask 'vscodium'
-cask 'xquartz'
+# brew 'wireshark'
+# cask 'utm'
+
+### Dev
+# brew 'autoconf'
+# brew 'automake'
+# brew 'cmake'
+# brew 'dep'
+# brew 'go'
+# brew 'node'
+# brew 'pyenv'
+# brew 'rust'
+
+### AWS
+# brew 'aws-iam-authenticator'
+# brew 'awscli'
+# brew 'eksctl'
+# brew 'fargatecli'
+# brew 's3cmd'
+
+### Azure
+# brew 'azure-cli'
+
+### K8S
+# brew 'helm'
+# brew 'istioctl'
+# brew 'kubectl'
+# brew 'kustomize'
+# cask 'lens'
+# brew 'skaffold'
+# brew 'stern'
+# brew 'yq'
+
+### Optional
+# brew 'asdf'
+# brew 'autossh'
+# brew 'certbot'
+# brew 'doctl'
+# brew 'emacs'
+# brew 'gawk'
+# brew 'git-crypt'
+# brew 'git-secret'
+# brew 'gitleaks'
+# brew 'hping'
+# brew 'httpie'
+# brew 'jenv'
+# brew 'jmeter'
+# brew 'libgit2'
+# brew 'libpng'
+# brew 'libtiff'
+# brew 'little-cms2'
+# brew 'openjdk'
+# brew 'openvpn'
+# brew 'ngrep'
+# brew 'p7zip'
+# brew 'rpm2cpio'
+# brew 'shellcheck'
+# brew 'trufflehog', link: false
+# brew 'vault'
+# brew 'v2ray'
+# brew 'webp'
+
+# tap 'hudochenkov/sshpass'
+# brew 'hudochenkov/sshpass/sshpass'
+
+### VS Code
+vscode "alefragnani.bookmarks"
+vscode "anthropic.claude-code"
+vscode "docker.docker"
+vscode "eamodio.gitlens"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.vscode-github-actions"
+vscode "hashicorp.hcl"
+vscode "hashicorp.terraform"
+vscode "kevinrose.vsc-python-indent"
+vscode "mhutchie.git-graph"
+vscode "ms-python.black-formatter"
+vscode "ms-python.debugpy"
+vscode "ms-python.flake8"
+vscode "ms-python.isort"
+vscode "ms-python.pylint"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode-remote.vscode-remote-extensionpack"
+vscode "ms-vscode.makefile-tools"
+vscode "ms-vscode.remote-explorer"
+vscode "ms-vscode.remote-server"
+vscode "redhat.vscode-yaml"

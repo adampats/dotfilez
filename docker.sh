@@ -1,34 +1,24 @@
 ### docker
 
-dme () {
-  vm="$1"
-  if [ -z $1 ]; then
-    echo -n "Using 'default' as docker-machine vm..."
-    echo " override by passing vm name as argument."
-    vm='default'
-  fi
-  eval "$(docker-machine env $vm)"
-}
-
-docker_image_cleanup () {
+function util_docker_image_cleanup () {
   images=$(docker images | grep "^<none>" | awk '{print $3}')
   if [ ! -z "$images" ]; then
     docker rmi $images
   fi
 }
 
-docker_container_cleanup () {
+function util_docker_container_cleanup () {
   containers=$(docker ps -qa)
   if [ ! -z "$containers" ]; then
     docker rm $containers
   fi
 }
 
-docker_stats () {
+function util_docker_stats () {
   docker stats --no-stream=true $(docker ps -q)
 }
 
-docker_ps () {
+function util_docker_ps () {
   containers=$(docker ps -q)
 	for i in $containers; do
 		ds=$(docker inspect $i)
@@ -38,7 +28,7 @@ docker_ps () {
 }
 
 # Fetch list of images (repositories) from a remote Docker Registry 2.0
-docker_reg_images () {
+function util_docker_reg_images () {
   if [ -z $1 ]; then
     echo "Pass registry hostname as argument."
   else
@@ -53,7 +43,7 @@ docker_reg_images () {
 }
 
 # Fetch versions for a given image
-docker_reg_image_versions () {
+function util_docker_reg_image_versions () {
   if [ -z $1 ] || [ -z $2 ]; then
     echo "Pass registry hostname and image name as arguments."
   else
@@ -70,7 +60,7 @@ docker_reg_image_versions () {
 }
 
 # Dump all docker registry image versions
-docker_reg_image_dump () {
+function util_docker_reg_image_dump () {
   if [ -z $1 ]; then
     echo "Pass registry hostname as argument."
   else

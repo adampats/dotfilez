@@ -1,7 +1,17 @@
-# General bash utilities I use
+# General bash utilities
+
+function util_random_string () {
+  if [ -z $1 ]; then
+    echo "Specify number of characters as argument."
+  else
+    cat /dev/urandom | \
+      LC_ALL=C tr -dc 'a-zA-Z0-9' | \
+      fold -w $1 | head -n 1
+  fi
+}
 
 # create env vars based on 'key=value' env file
-load_env () {
+function util_load_env () {
   if [ -z $1 ]; then
     echo "Provide path to env file..."
   else
@@ -9,12 +19,12 @@ load_env () {
   fi
 }
 
-timestamp() {
+function util_timestamp() {
   date +"%Y%m%d%H%M%S"
 }
 
 # Mac OS X timer with desktop notification
-timer () {
+function util_timer () {
   if [ -z $1 ]; then
     echo "Provide time in minutes as argument."
   else
@@ -31,7 +41,7 @@ timer () {
   fi
 }
 
-weather () {
+function util_weather () {
   if [ -z $1 ]; then
     location="seattle,wa"
   else
@@ -44,43 +54,20 @@ weather () {
   cd $OLDPWD
 }
 
-list_vars () {
+function util_list_vars () {
   compgen -v | while read var; do printf "%s=%q\n" "$var" "${!var}"; done
 }
 
-
-### git
-
-# jenkins
-jenkins_set_jcli () {
-  if [ -z $JENKINS ]; then
-    echo '$JENKINS host not set. e.g. https://$JENKINS'
-  else
-    if [ ! -f jenkins-cli.jar ]; then
-      curl -k https://$JENKINS/jnlpJars/jenkins-cli.jar -O
-    fi
-    read -s -p "password: " PASS
-    java -jar jenkins-cli.jar -noCertificateCheck -noKeyAuth -s https://$JENKINS \
-      login --username $USER --password $PASS
-    alias jcli="java -jar jenkins-cli.jar -noCertificateCheck -noKeyAuth -s https://$JENKINS "
-  fi
-}
-
-jenkins_run_job () {
-  if [ -z $1 ] || [ -z $2 ] || [ -z $3 ]; then
-    echo "Missing args.  Syntax: jenkins_run_job JENKINS_HOST JOB_NAME API_TOKEN PARAMS=foo"
-  else
-    resp=$(curl -i -s -k -X POST \
-      "https://$1/job/$2/buildWithParameters?$4" \
-      -u "$USER:$3")
-    echo $resp
-  fi
-}
-
-wifi_signal () {
+function util_wifi_signal () {
   /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 }
 
-wifi_survey () {
+function util_wifi_survey () {
   /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s
+}
+
+function util_pyinit () {
+  pyenv version
+  python -m venv venv
+  source venv/bin/activate
 }

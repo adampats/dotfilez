@@ -3,7 +3,7 @@
 # enable AWS CLI tab completion!
 complete -C $(which aws_completer) aws
 
-aws_ec2_list () {
+function util_aws_ec2_list () {
   if [ -z $1 ]; then
     echo "INFO: Optionally provide region as argument. Default is current configured."
   else
@@ -15,7 +15,7 @@ aws_ec2_list () {
     ".|.Reservations[]|.Instances[]|{$jq_filter}"
 }
 
-aws_ec2_images () {
+function util_aws_ec2_images () {
   aws ec2 describe-images --owner "self" | jq -S ".|.Images[]|{ \
     Name,ImageId,Platform,Description, \
     SnapshotId:(.BlockDeviceMappings[].Ebs.SnapshotId), \
@@ -23,7 +23,7 @@ aws_ec2_images () {
 }
 
 # launch an instance with args
-aws_ec2_run () {
+function util_aws_ec2_run () {
   # defaults
   itype='t2.micro'
   key='adamthepatterson_rsa'
@@ -51,7 +51,7 @@ aws_ec2_run () {
 }
 
 # spin up some micros, specify count via $1
-aws_ec2_run_micro () {
+function util_aws_ec2_run_micro () {
   if [ -z $1 ]; then key='adamthepatterson_rsa'; else key=$1; fi
   if [ -z $2 ]; then count=1; else count=$2; fi
   jq_filter='State,VpcId,InstanceId,KeyName,SecurityGroups,InstanceType,Placement'
@@ -65,7 +65,7 @@ aws_ec2_run_micro () {
 }
 
 # get public IP for an instance
-aws_ec2_ip () {
+function util_aws_ec2_ip () {
   if [ -z $1 ]; then
     echo "Provide instance id as argument..."
   else
@@ -74,24 +74,24 @@ aws_ec2_ip () {
 }
 
 # takes parameter of EC2 instance ID to terminate
-aws_ec2_terminate () {
+function util_aws_ec2_terminate () {
   read -r -p "Terminate instance, $1, are you sure? [Y/n]" response
   if [[ $response =~ ^(yes|y| ) ]] || [ -z $response ]; then
     aws ec2 terminate-instances --instance-ids $1 | jq .
   fi
 }
 
-aws_sg_list () {
+function util_aws_sg_list () {
   jq_filter='Description,GroupName,GroupId,VpcId'
   aws ec2 describe-security-groups | jq -S ".|.SecurityGroups[]|{$jq_filter}"
 }
 
-aws_iam_roles () {
+function util_aws_iam_roles () {
   aws iam list-roles | jq -S ".|.Roles[]|{RoleName,Arn,RoleId,CreateDate}"
 }
 
 # launch a spot instance
-aws_spot_run () {
+function util_aws_spot_run () {
   # defaults
   itype='m3.medium'
   price='0.03'
@@ -132,7 +132,7 @@ EOF
 }
 
 # get the latest spot price for a given instance type ($1)
-aws_spot_price () {
+function util_aws_spot_price () {
   if [ -z $1 ]; then
     echo "Provide instance type as argument..."
   else
@@ -148,7 +148,7 @@ aws_spot_price () {
 }
 
 # list spot requests, short format
-aws_spot_requests () {
+function util_aws_spot_requests () {
   if [ -z $1 ]; then
     echo "INFO: Optionally provide region as argument. Default is current configured."
   else
@@ -164,7 +164,7 @@ aws_spot_requests () {
 }
 
 # put ~/.aws/credentials creds into env variables
-aws_env_vars () {
+function util_aws_env_vars () {
   if [ -z $1 ]; then
     echo "Provide profile name as first argument."
   else
@@ -178,7 +178,7 @@ aws_env_vars () {
 }
 
 # find what IAM user an access key is tied to
-aws_access_key_to_user () {
+function util_aws_access_key_to_user () {
   if [ -z $1 ]; then
     echo "Usage: $FUNCNAME AWS_ACCESS_KEY_ID"
   else
@@ -189,7 +189,7 @@ aws_access_key_to_user () {
 }
 
 # return short instance list based on keyword in Name tag
-aws_ec2_find () {
+function util_aws_ec2_find () {
   if [ -z $1 ]; then
     echo "Provide single Key=Value pair to search on as argument."
   else
@@ -207,17 +207,17 @@ aws_ec2_find () {
 }
 
 # get current AWS account number based on IAM credentials being used
-aws_get_account_id () {
+function util_aws_get_account_id () {
   aws sts get-caller-identity --output text --query Account
 }
 
 # remove AWS credential env vars from current shell
-aws_unset_env_vars () {
+function util_aws_unset_env_vars () {
   unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID
 }
 
 # aws sts assume-role helper method - pulls creds + token into current shell
-aws_sts_assume_role () {
+function util_aws_sts_assume_role () {
   if [ -z $1 ]; then
     echo "Provide role arn as argument"
   else
@@ -238,7 +238,7 @@ aws_sts_assume_role () {
 }
 
 # aws cli mfa helper - acquire sts creds when using MFA
-aws_mfa_sts () {
+function util_aws_mfa_sts () {
   if [[ -z $1 ]]; then
     echo "Provide MFA arn + token as arguments."
   elif [[ -z $AWS_DEFAULT_REGION ]]; then
