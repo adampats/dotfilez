@@ -35,6 +35,7 @@ brew 'sl'
 brew 'terminal-notifier'
 brew 'tmux'
 brew 'tree'
+brew 'uv'
 brew 'wget'
 brew 'yt-dlp'
 

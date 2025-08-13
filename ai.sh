@@ -24,22 +24,16 @@ function ai_youtube_summary () {
   if [ -z $1 ]; then
     echo "Provide URL to Youtube video as argument"
   else
-    source $DIR/scripts/venv/bin/activate
-    python $DIR/scripts/claude_youtube.py -u $1
-    deactivate
+    uv run --project $DIR/scripts python $DIR/scripts/claude_youtube/claude_youtube.py -u $1
   fi
 }
 
 function claude_youtube () {
-  source $DIR/scripts/venv/bin/activate
-  python $DIR/scripts/claude_youtube.py "$@"
-  deactivate
+  uv run --project $DIR/scripts python $DIR/scripts/claude_youtube/claude_youtube.py "$@"
 }
 
 function tokenizer () {
-  source $DIR/scripts/venv/bin/activate
-  python $DIR/scripts/tokenizer.py "$@"
-  deactivate
+  uv run --project $DIR/scripts python $DIR/scripts/tokenizer/tokenizer.py "$@"
 }
 
 function transcribe() {
